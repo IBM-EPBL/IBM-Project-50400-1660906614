@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+val=['A','B','C','D','E','F','G','H','I']
 
 model=load_model('model.h5')
 from skimage.transform import resize
@@ -12,10 +13,9 @@ def detect(frame):
     img=np.expand_dims(img,axis=0)
     if(np.max(img)>1):
         img = img/255.0
-    prediction = model.predict(img)
-    print(prediction)
     predict_x=model.predict(img)
     classes_x=np.argmax(predict_x,axis=1)
-    print(classes_x)
-frame=cv2.imread(r"C:\Users\Akshaya\PycharmProjects\Realtime_Communication_System_For_Specially_Abled\Dataset\asl_alphabet_test\asl_alphabet_test\D_test.jpg")
+    x=classes_x[0]
+    print(val[x])
+frame=cv2.imread(r"C:\Users\Akshaya\PycharmProjects\Realtime_Communication_System_For_Specially_Abled\Dataset\test_set\B\1.png")
 data=detect(frame)

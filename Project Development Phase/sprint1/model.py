@@ -1,92 +1,42 @@
-import numpy as np
+import keras
+from keras.optimizers import Adam, SGD
 import tensorflow as tf
+import cv2
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-batch_size=32
-img_height=64
-img_width=64
-train_dir = os.path.join(r'C:\Users\Akshaya\PycharmProjects\Realtime_Communication_System_For_Specially_Abled\Dataset\asl_alphabet_train')
-train_ds = tf.keras.utils.image_dataset_from_directory(
-    train_dir,
-    validation_split=0.1,
-    subset="training",
-    seed=123,
-    image_size=(img_height, img_width),
-    batch_size=batch_size)
-validation_ds = tf.keras.utils.image_dataset_from_directory(
-    train_dir,
-    validation_split=0.09,
-    subset="validation",
-    seed=123,
-    image_size=(img_height, img_width),
-    batch_size=batch_size)
-test_ds = tf.keras.utils.image_dataset_from_directory(
-    train_dir,
-    validation_split=0.01,
-    subset="validation",
-    seed=123,
-    image_size=(img_height, img_width),
-    batch_size=batch_size)
-import matplotlib.pyplot as plt
-
-class_names = train_ds.class_names
-plt.figure(figsize=(10, 10))
-for images, labels in train_ds.take(1):
-    for i in range(len(class_names)):
-        ax = plt.subplot(6,5 , i + 1)
-        plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title(class_names[labels[i]])
-        plt.axis("off")
+import numpy as np
 from keras import Sequential
-from keras import layers
+import matplotlib.pyplot as plt
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Conv2D, MaxPool2D
+from keras_preprocessing.image import ImageDataGenerator
+train_path = r'Dataset\test_set'
+test_path = r'Dataset\training_set'
+train_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.vgg16.preprocess_input).flow_from_directory(directory=train_path, target_size=(64,64), class_mode='categorical', batch_size=10,shuffle=True)
+test_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.vgg16.preprocess_input).flow_from_directory(directory=test_path, target_size=(64,64), class_mode='categorical', batch_size=10, shuffle=True)
+imgs, labels = next(train_batches)
 
-model = Sequential([
-    layers.Rescaling(1. / 255),
-    layers.Conv2D(16, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
+model = Sequential()
 
-    layers.Conv2D(32, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Dropout(0.25),
+model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(64,64,3)))
+model.add(MaxPool2D(pool_size=(2, 2), strides=2))
 
-    layers.Conv2D(64, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Dropout(0.25),
+model.add(Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding = 'same'))
+model.add(MaxPool2D(pool_size=(2, 2), strides=2))
 
-    layers.Conv2D(128, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Dropout(0.25),
+model.add(Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding = 'valid'))
+model.add(MaxPool2D(pool_size=(2, 2), strides=2))
 
-    layers.Flatten(),
-    layers.Dense(256, activation='relu'),
-    layers.Dense(len(class_names), activation='softmax')
-])
-model.compile(loss='sparse_categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
+model.add(Flatten())
+
+model.add(Dense(512,activation ="relu"))
+
+model.add(Dense(9,activation ="softmax"))
+model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 device_name = tf.test.gpu_device_name()
 if "GPU" not in device_name:
-    history = model.fit(train_ds, batch_size=32,validation_batch_size=32, validation_data=validation_ds,epochs=5)
+    history = model.fit(train_batches, batch_size=32,validation_batch_size=32,epochs=5)
 else:
     with tf.device('/gpu:0'):
-        history = model.fit(train_ds, batch_size=32,validation_batch_size=32, validation_data=validation_ds,epochs=5)
-
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(len(acc))
-
-plt.plot(epochs, acc, 'r', label='Training accuracy')
-plt.plot(epochs, val_acc, 'b', label='Validation accuracy')
-plt.title('Training and validation accuracy')
-plt.legend()
-plt.figure()
-
-plt.plot(epochs, loss, 'r', label='Training Loss')
-plt.plot(epochs, val_loss, 'b', label='Validation Loss')
-plt.title('Training and validation loss')
-plt.legend()
-
-plt.show()
+        history = model.fit(train_batches, batch_size=32,validation_batch_size=32,epochs=5)
 model.save('model.h5')
