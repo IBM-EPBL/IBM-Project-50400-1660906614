@@ -16,6 +16,7 @@ train_batches = train.flow_from_directory(directory=train_path, target_size=(64,
 test_batches = test.flow_from_directory(directory=test_path, target_size=(64,64), class_mode='categorical', batch_size=300, shuffle=True,color_mode="grayscale")
 model = Sequential()
 model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(64,64,1)))
+model.add(MaxPool2D(pool_size=(2,2)))
 model.add(Flatten())
 model.add(Dense(512,activation ="relu"))
 model.add(Dense(9,activation ="softmax"))
