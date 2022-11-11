@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Roboto:wght@300;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --hover: #000;
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inside {
+  position: relative;
+  height: 60%;
+  width: 50%;
+  background: rgba(255,255,255,0.9);
+  border-radius: 30px;
+  /* border: 5px solid var(--black); */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  -webkit-box-shadow: 12px 12px 17px 1px rgba(0, 0, 0, 0.59);
+  -moz-box-shadow: 12px 12px 17px 1px rgba(0, 0, 0, 0.59);
+  box-shadow: 12px 12px 17px 1px rgba(0, 0, 0, 0.59);
+}
+
+.wrapper {
+  position: relative;
+  height: 75%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.Head {
+  position: relative;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 30%;
+}
+
+.Head h1 {
+  font-size: 3rem;
+}
+
+.Head span {
+  position: relative;
+  height: 5px;
+  width: 60%;
+  background: var(--black);
+}
+
+.box {
+  position: relative;
+  font-family: "Oxygen", sans-serif;
+  font-weight: 700;
+  border: 2px solid var(--black);
+  border-radius: 1.5rem;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.box1 {
+  padding: 0.8rem 2rem;
+}
+
+.box2 {
+  padding: 0.8rem 1.5rem;
+}
+
+.box:hover {
+  color: var(--white);
+  background: var(--hover);
+}
