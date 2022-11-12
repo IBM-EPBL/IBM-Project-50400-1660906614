@@ -1,4 +1,3 @@
-from deepface import DeepFace
 import numpy as np
 import os
 import math
