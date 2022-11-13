@@ -61,6 +61,18 @@ button{
 }
 
 </style>
+	  <script>
+
+        function loadGoogleTranslate()
+    
+        {
+    
+            new google.translate.TranslateElement("element")
+    
+        }
+    
+    </script>
+     <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
   </head>
 
   <body>
@@ -70,6 +82,7 @@ button{
           <img src="https://img.freepik.com/free-vector/sign-language-alphabet-hand-drawn-style_23-2147872270.jpg?w=2000" style="width:50%;"/>
       </div>
        <div class="col"><div class="voice_to_text">
+	       <div id="element"></div>
     <h1>Voice to text converter</h1>
     <textarea name="" id="convert_text"></textarea>
     <button id="click_to_record" class="btn-danger">Voice to Text</button>
