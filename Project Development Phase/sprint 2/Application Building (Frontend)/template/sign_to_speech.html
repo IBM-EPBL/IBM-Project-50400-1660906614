@@ -8,10 +8,23 @@
         }
 
     </style>
+    <script>
+
+        function loadGoogleTranslate()
+    
+        {
+    
+            new google.translate.TranslateElement("element")
+    
+        }
+    
+    </script>
+     <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
 </head>
 
   <body>
     <h1>Sign to speech</h1>
+      <div id="google_element"></div>
     <div>
 <img src="{{ url_for('video') }}" width="50%"/>
 
