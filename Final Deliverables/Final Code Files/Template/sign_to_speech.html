@@ -1,0 +1,44 @@
+<html>
+<head>
+    <style>
+        img{
+        display: block;
+  margin-left: auto;
+  margin-right: auto;
+        }
+
+    </style>
+    <script>
+
+        function loadGoogleTranslate()
+    
+        {
+    
+            new google.translate.TranslateElement("google_element")
+    
+        }
+    
+    </script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+</head>
+
+  <body>
+    <h1>Sign to speech</h1>
+    <div>
+        <div class="text-center" id="google_element"></div>
+<img src="{{ url_for('video') }}" width="50%" height="50%"/>
+<br/>
+<div class="text-center">
+<a href="/">
+    <button class="btn btn-danger btn-lg" >Exit</button>
+</a></div>
+</div>
+
+   
+    </body>
+
+
+</html>

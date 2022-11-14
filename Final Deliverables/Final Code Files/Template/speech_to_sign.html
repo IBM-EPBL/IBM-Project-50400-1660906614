@@ -1,0 +1,100 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+
+<script>
+
+	function loadGoogleTranslate()
+
+	{
+
+		new google.translate.TranslateElement("google_element")
+
+	}
+
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 50%;
+}
+    *,*:after,*:before{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: arial;
+	font-size: 16px;
+	margin: 0;
+	color: #000;
+
+	display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.voice_to_text{
+  width: 600px;
+  text-align: center;
+}
+h1{
+	color: #000000;
+	font-size: 50px;
+}
+#convert_text{
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  resize: none;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+button{
+	padding: 12px 20px;
+  background: #0ea4da;
+  border: 0;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+</style>
+  </head>
+
+  <body>
+ <div class="container">
+  <div class="row">
+      <div class="col">
+          <img src="https://img.freepik.com/free-vector/sign-language-alphabet-hand-drawn-style_23-2147872270.jpg?w=2000" style="width:50%;"/>
+      </div>
+       <div class="col"><div class="voice_to_text">
+        <div class="text_center" id="google_element"></div>
+    <h1>Voice to text converter</h1>
+    <textarea name="" id="convert_text"></textarea>
+    <button id="click_to_record" class="btn-primary">Voice to Text</button><br/>
+    <a href="/">
+      <button class="btn btn-danger btn-lg">Exit</button>
+  </a>
+       </div>
+       </div></div></div>
+
+       
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+
+</html>
