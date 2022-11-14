@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <style>
+body{
+  background-image: url("https://image.shutterstock.com/image-vector/deaf-sign-language-welcome-line-260nw-1585429861.jpg");
+   background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+  <script>
+
+        function loadGoogleTranslate()
+    
+        {
+    
+            new google.translate.TranslateElement("element")
+    
+        }
+    
+    </script>
+     <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script> 
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/index.css') }}" />
+  </head>
+  <body>
+    <section class="main">
+      <div class="inside">
+        <div class="wrapper">
+            <div class="Head">
+                <h1>Welcome</h1>
+                <span></span>
+                <div id="element"></div>
+            </div>
+             
+          <a class="box1 box" href="sign_to_speech">Sign to speech</a>
+          <a class="box1 box" href="speech_to_sign">Speech to sign</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
