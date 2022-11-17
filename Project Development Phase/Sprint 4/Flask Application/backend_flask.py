@@ -3,7 +3,6 @@ import os
 import math
 import cv2
 from fer import FER
-import speech_recognition as sr
 import pyttsx3
 from keras.models import model_from_json
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
