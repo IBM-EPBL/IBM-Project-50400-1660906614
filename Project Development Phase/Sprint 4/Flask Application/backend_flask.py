@@ -11,9 +11,6 @@ from flask import Flask, render_template, Response, request
 import  tensorflow as tf
 from cvzone.HandTrackingModule import HandDetector
 from skimage.transform import resize
-facecascade= cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-graph=tf.compat.v1.get_default_graph()
-writer=None
 model=load_model('model.h5')
 font = cv2.FONT_HERSHEY_SIMPLEX
 vals=['A','B','C','D','E','F','G','H','I']
